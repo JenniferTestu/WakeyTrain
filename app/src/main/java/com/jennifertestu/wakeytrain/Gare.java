@@ -1,7 +1,5 @@
 package com.jennifertestu.wakeytrain;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
 
 public class Gare implements Serializable {

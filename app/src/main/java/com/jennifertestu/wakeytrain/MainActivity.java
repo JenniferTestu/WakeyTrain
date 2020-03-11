@@ -30,19 +30,11 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 import android.util.Log;
-import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -67,32 +59,6 @@ public class MainActivity extends AppCompatActivity {
 
     Boolean alerte = false;
 
-
-    public String readLine(String word) throws IOException {
-
-        InputStream in = getResources().openRawResource(R.raw.gare);
-        BufferedReader r = new BufferedReader(new InputStreamReader(in));
-
-        try {
-
-            String lineStr = null;
-            int currentLine = 0;
-
-            while ((lineStr = r.readLine()) != null) {
-
-                if (lineStr.contains(word))
-                    return lineStr;
-
-            }
-
-        } finally {
-            if (r != null) {
-                r.close();
-            }
-        }
-
-        throw new IOException("ERROR");
-    }
 
 
     @Override
@@ -228,16 +194,15 @@ public class MainActivity extends AppCompatActivity {
 
                 } else {
 
-                    try {
 
-                        s = readLine(a);
+                        //s = readLine(a);
 
-                        String[] tab = s.split(";");
+                        //String[] tab = s.split(";");
 
                         /*dest_longitude = Double.parseDouble(tab[1]);
                         dest_latitude = Double.parseDouble(tab[2]);*/
 
-                        tv.setText("L'alarme enclenchée avec pour gare de destination " + tab[0]);
+                        tv.setText("L'alarme enclenchée avec pour gare de destination " + destination.getNom());
 
                         if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                             // TODO: Consider calling
@@ -251,11 +216,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                         locationManager.requestLocationUpdates("gps", 1000, 0, locationListener);
 
-                    } catch (IOException e) {
-                        s = "ERROR";
-                        tv.setText(s);
-                        e.printStackTrace();
-                    }
 
                 }
 
