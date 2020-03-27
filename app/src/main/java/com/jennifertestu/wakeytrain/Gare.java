@@ -4,7 +4,9 @@ import java.io.Serializable;
 
 public class Gare implements Serializable {
 
+    // Libellé de la gare
     private String nom;
+    // Variables pour les coordonnées
     private double longitude;
     private double latitude;
 
